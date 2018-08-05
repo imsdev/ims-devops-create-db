@@ -13,7 +13,7 @@ Figure 1. Database structure for the sample IMS Insurance company
 
 ## Repository structure
 
-* `\DBsource`
+* `\dbsource`
   * `DEMODATA`: A set of DFSDDLT0 statements to insert segments into the Insurance database
   * `DEMODB`: The DBD for the Insurance Database. This DBD includes definitions for all the fields in the database, so that IMS SQL can be used to access the database.
   * `DEMODBRC`: The JCL to define the Insurance Database to DBRC. 
