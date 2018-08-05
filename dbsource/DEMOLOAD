@@ -1,0 +1,10 @@
+       TITLE 'IMSDB:LOAD UC1 MNA APPLICATION HIDAM DATA BASE'           00010000
+*                                                                       00020000
+DEMOPCB PCB   TYPE=DB,DBDNAME=DEMODB,PROCOPT=L,KEYLEN=20                00030000
+         SENSEG  NAME=CUSTOMER,PARENT=0                                 00040000
+         SENSEG  NAME=DEPNDENT,PARENT=CUSTOMER                          00050000
+         SENSEG  NAME=POLICY,PARENT=CUSTOMER                            00060000
+         SENSEG  NAME=CLAIM,PARENT=POLICY                               00070000
+         SENSEG  NAME=COMMHIST,PARENT=CUSTOMER                          00080000
+         PSBGEN  LANG=COBOL,PSBNAME=DEMOLOAD                            00090000
+         END                                                            00100000

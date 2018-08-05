@@ -1,0 +1,11 @@
+       TITLE 'DEMO01 FOR DEMONSTRATION'                                 00010000
+*                                                                       00020000
+DEMOPCB PCB   TYPE=DB,DBDNAME=DEMODB,PROCOPT=AP,KEYLEN=210              00110000
+         SENSEG  NAME=CUSTOMER,PARENT=0                                 00120000
+         SENSEG  NAME=DEPNDENT,PARENT=CUSTOMER                          00130000
+         SENSEG  NAME=POLICY,PARENT=CUSTOMER                            00140000
+         SENSEG  NAME=CLAIM,PARENT=POLICY                               00150000
+         SENSEG  NAME=COMMHIST,PARENT=CUSTOMER                          00160000
+*                                                                       00170000
+         PSBGEN  LANG=COBOL,PSBNAME=DEMO01,CMPAT=YES                    00180000
+         END                                                            00190000

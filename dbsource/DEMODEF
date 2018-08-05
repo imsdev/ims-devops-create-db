@@ -1,0 +1,101 @@
+//DEMODEF  JOB ,                                                        00010000
+// CLASS=A,MSGCLASS=H,MSGLEVEL=(1,1),NOTIFY=&SYSUID,REGION=32M          00020000
+//*                                                                     00030000
+//SPOC      EXEC PGM=CSLUSPOC,                                          00040000
+//  PARM=('IMSPLEX=PLXDA,ROUTE=IMDA,WAIT=30')                           00050000
+//STEPLIB   DD DISP=SHR,DSN=IMSVS.IMDA.SDFSRESL                         00060000
+//SYSPRINT  DD SYSOUT=*                                                 00070000
+//SYSIN     DD *                                                        00080000
+ UPDATE DB NAME(DEMO*) STOP(ACCESS)                                     00090000
+//*                                                                     00100000
+//ALLOCATE EXEC PGM=IDCAMS,DYNAMNBR=200                                 00110000
+//SYSPRINT DD SYSOUT=*                                                  00120000
+//SYSIN    DD *                                                         00130000
+  DELETE NATSQL.DEMODB.IMSDB CLUSTER                                    00140000
+  SET MAXCC=0                                                           00150000
+  DELETE NATSQL.DEMODB.IMSDX CLUSTER                                    00160000
+  SET MAXCC=0                                                           00170000
+  DEFINE CLUSTER (NAME('NATSQL.DEMODB.IMSDX') -                         00180000
+             INDEXED KEYS (4,5) -                                       00190000
+             RECORDSIZE (10,10) -                                       00200000
+             STORAGECLASS(MEDIUM) -                                     00210000
+             SPEED NOERASE SHAREOPTIONS(3 3) ) -                        00220000
+         DATA (NAME('NATSQL.DEMODB.IMSDX.DATA') -                       00230000
+             TRACKS(1 1) -                                              00240000
+             BUFFERSPACE(2560) -                                        00250000
+             CONTROLINTERVALSIZE(4096) -                                00260000
+             FREESPACE(10 10) -                                         00270000
+             NONSPANNED -                                               00280000
+             VOLUME(* * *) ) -                                          00290000
+         INDEX (NAME('NATSQL.DEMODB.IMSDX.INDEX') -                     00300000
+             TRACKS(1 1) -                                              00310000
+             CONTROLINTERVALSIZE(512) -                                 00320000
+             VOLUME(* * *) )                                            00330000
+                                                                        00340000
+  DEFINE CLUSTER (NAME('NATSQL.DEMODB.IMSDB') -                         00350000
+             NONINDEXED -                                               00360000
+             SHR(3 3) SPEED CYL(70 20) VOL(* * *) -                     00370000
+             RECORDSIZE (4089,4089) -                                   00380000
+             STORAGECLASS(MEDIUM) -                                     00390000
+             CONTROLINTERVALSIZE(4096) ) -                              00400000
+         DATA (NAME('NATSQL.DEMODB.IMSDB.DATA') )                       00410000
+/*                                                                      00420000
+//*                                                                     00430000
+//*       INIT - INSERT THEN DELETE DUMMY ROOT SEGMENT RECORD           00440000
+//*                                                                     00450000
+//*                                                                     00460000
+//* +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 00470000
+//*                                                                     00480000
+//*  INSERT DUMMY RECORD                                                00490000
+//*                                                                     00500000
+//IMSISRT  EXEC PGM=DFSRRC00,                                           00510000
+//            PARM='DLI,DFSDDLT0,DEMOLOAD,,,,,,,,,,,N'                  00520000
+//STEPLIB  DD DISP=SHR,DSN=IMSVS.IMDA.EXITLIB                           00530000
+//         DD DISP=SHR,DSN=IMSVS.IMDA.GNUC                              00540000
+//         DD DISP=SHR,DSN=IMSVS.IMDA.SDFSRESL                          00550000
+//DFSRESLB DD DISP=SHR,DSN=IMSVS.IMDA.SDFSRESL                          00560000
+//IMS      DD DISP=SHR,DSN=IMSVS.IMDA.PSBLIB                            00570000
+//         DD DISP=SHR,DSN=IMSVS.IMDA.DBDLIB                            00580000
+//DEMODX   DD DISP=SHR,DSN=NATSQL.DEMODB.IMSDX                          00590000
+//DEMODB   DD DISP=SHR,DSN=NATSQL.DEMODB.IMSDB                          00600000
+//*                                                                     00610000
+//SYSPRINT DD SYSOUT=*                                                  00620000
+//PRINTDD  DD SYSOUT=*                                                  00630000
+//SYSUDUMP DD SYSOUT=*                                                  00640000
+//IEFRDER  DD DUMMY                                                     00650000
+//DFSVSAMP DD DISP=SHR,DSN=IMSVS.IMDA.UTIL(DFSVSAMP)                    00660000
+//*      1         2         3         4         5         6         7  00670000
+//*45678901234+678901234+678901234+678901234+678901234+678901234+678901200680000
+//SYSIN    DD *                                                         00690000
+S 1 1 1 111    DEMODB                                                   00700000
+L        ISRT  CUSTOMER                                                 00710000
+L        DATA  000000000DUMMYFRST DUMMYLAST                             00720000
+/*                                                                      00730000
+//*                                                                     00740000
+//*  DELETE DUMMY RECORD                                                00750000
+//*                                                                     00760000
+//IMSDLET  EXEC PGM=DFSRRC00,                                           00770000
+//            PARM='DLI,DFSDDLT0,DEMO01,,,,,,,,,,,N'                    00780000
+//STEPLIB  DD DISP=SHR,DSN=IMSVS.IMDA.EXITLIB                           00790000
+//         DD DISP=SHR,DSN=IMSVS.IMDA.GNUC                              00800000
+//         DD DISP=SHR,DSN=IMSVS.IMDA.SDFSRESL                          00810000
+//DFSRESLB DD DISP=SHR,DSN=IMSVS.IMDA.SDFSRESL                          00820000
+//IMS      DD DISP=SHR,DSN=IMSVS.IMDA.PSBLIB                            00830000
+//         DD DISP=SHR,DSN=IMSVS.IMDA.DBDLIB                            00840000
+//DEMODX   DD DISP=SHR,DSN=NATSQL.DEMODB.IMSDX                          00850000
+//DEMODB   DD DISP=SHR,DSN=NATSQL.DEMODB.IMSDB                          00860000
+//*                                                                     00870000
+//SYSPRINT DD SYSOUT=*                                                  00880000
+//SYSUDUMP DD SYSOUT=*                                                  00890000
+//PRINTDD  DD SYSOUT=*                                                  00900000
+//IEFRDER  DD DUMMY                                                     00910000
+//DFSVSAMP DD DISP=SHR,DSN=IMSVS.IMDA.UTIL(DFSVSAMP)                    00920000
+/*                                                                      00930000
+//*      1         2         3         4         5         6         7  00940000
+//*45678901234567890123456789012345678901234567890123456789012345678901200950000
+//SYSIN    DD *                                                         00960000
+S 1 1 1 111    DEMODB                                                   00970000
+L        GHU                                                            00980000
+L        DLET                                                           00990000
+/*                                                                      01000000
+//                                                                      01010000

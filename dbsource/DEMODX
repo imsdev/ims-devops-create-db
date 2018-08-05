@@ -1,0 +1,25 @@
+         DBD   NAME=(DEMODX),                                          X00010000
+               ACCESS=(INDEX,VSAM,PROT),                               X00020000
+               PASSWD=NO,                                              X00030000
+               DATXEXIT=NO,                                            X00040000
+               ENCODING=CP1047                                          00050000
+         DATASET DD1=DEMODX,                                           X00060000
+               DEVICE=3390,                                            X00070000
+               SIZE=(4096)                                              00080000
+         SEGM  NAME=CUSTINDX,                                          X00090000
+               EXTERNALNAME=CUSTINDX,                                  X00100000
+               PARENT=0,                                               X00110000
+               BYTES=4,                                                X00120000
+               FREQ=100000                                              00130000
+         FIELD NAME=(INDXSEQ,SEQ,U),                                   X00140000
+               EXTERNALNAME=INDXSEQ,                                   X00150000
+               BYTES=4,                                                X00160000
+               START=1,                                                X00170000
+               TYPE=C,                                                 X00180000
+               DATATYPE=CHAR                                            00190000
+         LCHILD NAME=(CUSTOMER,DEMODB),                                X00200000
+               POINTER=SNGL,                                           X00210000
+               INDEX=CUSTNO                                             00220000
+         DBDGEN                                                         00230000
+         FINISH                                                         00240000
+         END                                                            00250000
