@@ -38,7 +38,7 @@ This repository provides 3 options for creating the IMS sample Insurance databas
 ### Steps for using z/OS MF
 
 ### Steps for using Gen
-* Allocate an HFS data set on z/OS to store the database DEMO.SETUP.TERSE files, using these properties.
+* Allocate an HFS data set on z/OS to store the database DEMO.SETUP.TERSE file, using these properties.
   * Space units: CYLINDER
   * Primary quantity: 10
   * Secondary quantity: 10
