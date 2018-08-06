@@ -10,7 +10,6 @@ The CUSTOMER table contains information about the insurance company customer. Ea
 Figure 1. Database structure for the sample IMS Insurance company
 ![dbschema](./media/dbschema.png)
 
-
 ## Repository structure
 
 * `\dbsource`
@@ -50,7 +49,7 @@ This repository provides 3 options for creating the IMS sample Insurance databas
 * Update the JCL to your specific environment.
 
 #### Set up the Insurance database DBD and PSB definitions
-There are two DBDs and two PSBs to be generated. The source of these are `DBsource` folder. Use your standard DBDGEN process for the INSURDB and INSURDX databases, and your standard PSBGEN process for the DEMOLOAD and DEMO01 PSBs.
+There are two DBDs and two PSBs to be generated. The source of these are `dbsource` folder. Use your standard DBDGEN process for the INSURDB and INSURDX databases, and your standard PSBGEN process for the DEMOLOAD and DEMO01 PSBs.
 
 Once the DBDs and PSBs have been genned, perform an ACBGEN to add them to your Application Control Block library. If you are using the IMS Catalog, these definitions can be optionally loaded into the Catalog during the ACBGEN process, or later if desired.
 
