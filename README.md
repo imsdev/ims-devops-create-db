@@ -38,14 +38,13 @@ This repository provides 3 options for creating the IMS sample Insurance databas
 ### Steps for using z/OS MF
 
 ### Steps for using Gen
-
-* Allocate an HFS data set on z/OS to store the database DEMO.SETUP.TERSE files, using these properties.
-* Space units: CYLINDER
-* Primary quantity: 10
-* Secondary quantity: 10
-* Record format: FB
-* Record length: 1024
-* Block size: 27648
+  * Allocate an HFS data set on z/OS to store the database DEMO.SETUP.TERSE files, using these properties.
+  * Space units: CYLINDER
+  * Primary quantity: 10
+  * Secondary quantity: 10
+  * Record format: FB
+  * Record length: 1024
+  * Block size: 27648
 
 * Retrieve the DEMO.SETUP.TERSE from this repo and FTP to z/OS in binary mode.
 * Retrieve the UNPACK.jcl from this repo and FTP to z/OS in ascii mode.
