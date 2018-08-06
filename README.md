@@ -39,6 +39,18 @@ This repository provides 3 options for creating the IMS sample Insurance databas
 
 ### Steps for using Gen
 
+* Allocate an HFS data set on z/OS to store the database DEMO.SETUP.TERSE files, using these properties.
+* Space units: CYLINDER
+* Primary quantity: 10
+* Secondary quantity: 10
+* Record format: FB
+* Record length: 1024
+* Block size: 27648
+
+* Retrieve the DEMO.SETUP.TERSE from this repo and FTP to z/OS in binary mode.
+* Retrieve the UNPACK.jcl from this repo and FTP to z/OS in ascii mode.
+
+
 #### Set up the Insurance database DBD and PSB definitions
 There are two DBDs and two PSBs to be generated. The source of these are `DBsource` folder. Use your standard DBDGEN process for the INSURDB and INSURDX databases, and your standard PSBGEN process for the DEMOLOAD and DEMO01 PSBs.
 
